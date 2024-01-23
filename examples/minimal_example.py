@@ -19,7 +19,7 @@ class BOM_Type(Enum):
 class BillOfMaterial(models.Submodel):
     components: typing.List[str]
     bill_of_material_info: BillOfMaterialInfo
-    bom_type: BOM_Type
+    bom_type: typing.Optional[BOM_Type]
 
 class ProcessModel(models.Submodel):
     processes: typing.List[str]
@@ -44,30 +44,36 @@ class Process(models.AAS):
 # Test the transformation capabilities of aas2openapi
 
 example_product = Product(
-    id="Product1",
+    id_="Product1",
+    id_short="test",
     process_model=ProcessModel(
-        id="PMP1",
+        id_="PMP1",
+        id_short="test",
         processes=["join", "screw"],
         semantic_id="PMP1_semantic_id",
     ),
     bill_of_material=BillOfMaterial(
-        id="BOMP1", 
+        id_="BOMP1", 
+        id_short="test",
         components=["stator", "rotor", "coil", "bearing"],
         semantic_id="BOMP1_semantic_id",
         bill_of_material_info=BillOfMaterialInfo(
+            id_="test",
             id_short="BOMInfoP1",
             semantic_id="BOMInfoP1_semantic_id",
             manufacterer="Bosch", 
             product_type="A542", 
         ),
-        bom_type="MBOM",
+        #bom_type="MBOM",
     ),
 )
 
 example_process = Process(
-    id="Process1",
+    id_="Process1",
+    id_short="test",
     capability=Capability(
-        id="Capability1",
+        id_="Capability1",
+        id_short="test",
         capability="screw",
         semantic_id="Capability1_semantic_id",
     ),
