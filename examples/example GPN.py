@@ -5,6 +5,7 @@ from aas2openapi import models
 from enum import Enum
 
 from models.Layer1 import Layer1, KPI,Product, BOM, Order, required_processes, Process, required_capabilities, Resource, Capability, parameters
+from models.Network import Network, Product_Network
 
 example_Layer_1 = Layer1(
     id_="test1",
@@ -68,8 +69,26 @@ example_Layer_1 = Layer1(
     ),
 )
 
+example_network = Network(
+    id_="test21",
+    id_short="test21",
+    Product=Product_Network(
+        id_="test20",
+        id_short="test20",
+        testa="test",
+        testb="test",
+        product_group="test",
+        BOM=BOM(
+            id_="test4",
+            id_short="test4",
+            components="test",
+            subcomponents="test",
+            material="test",
+        )
+    )
+)
 
-obj_store = aas2openapi.convert_pydantic_model_to_aas(example_Layer_1)
+obj_store = aas2openapi.convert_pydantic_model_to_aas(example_network)
 
 import basyx.aas.adapter.json.json_serialization
 
@@ -84,7 +103,7 @@ data_model = aas2openapi.convert_object_store_to_pydantic_models(obj_store)
 # Create the middleware and load the models
 middleware = Middleware()
 
-middleware.load_pydantic_models([Layer1])
+middleware.load_pydantic_models([Network])
 # middleware.load_pydantic_model_instances([example_product, example_process])
 # middleware.load_aas_objectstore(obj_store)
 # middleware.load_json_models(file_path="examples/example_json_model.json")
