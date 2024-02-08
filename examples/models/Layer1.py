@@ -13,29 +13,23 @@ class KPI(Submodel):
     actualValue: float
 
 class BOM(SubmodelElementCollection):
-    components: str
-    subcomponents: str
+    component: str
+    subcomponents: Optional[BOM]
     material: str
 
 class Product(Submodel):
-    product_group:str
+    product_group: str
     BOM: BOM
-
-class required_processes(SubmodelElementCollection):
-    test: Optional[str]
 
 class Order(Submodel):
     orderType: str
     quantity: int
-    time_of_order: str
-    required_processes: required_processes
-
-class required_capabilities(SubmodelElementCollection):
-    test: Optional[str]
+    timeOfOrder: str
+    RequiredProcesses: Optional[List[str]]
 
 class Process(Submodel):
     processType: str
-    required_capabilities: required_capabilities
+    required_capabilities: Optional[List[str]]
 
 class Resource(Submodel):
     resourceType: str
@@ -46,7 +40,7 @@ class parameters(SubmodelElementCollection):
 
 class Capability(Submodel):
     capabilityType: str
-    parameters: parameters
+    parameters: Optional[parameters]
 
 class Layer1(AAS):
     KPI: KPI
