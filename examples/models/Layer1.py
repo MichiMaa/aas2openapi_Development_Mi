@@ -35,8 +35,9 @@ class Resource(Submodel):
     resourceType: str
     position: str
 
-class parameters(SubmodelElementCollection):
-    test: str
+class Parameters(SubmodelElementCollection):
+    name: str
+    value: float
 
 class Capability(Submodel):
     capabilityType: str
