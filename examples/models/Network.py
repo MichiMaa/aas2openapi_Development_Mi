@@ -13,15 +13,44 @@ from Layer1 import Resource
 from Layer1 import Capability
 
 class Sub_KPI(SubmodelElementCollection):
-    KPI_Type: str
-    Sub_KPI:Optional[KPI]
-    Sub_KPIList:Optional[Sub_KPI]
+    Sub_KPI :list
+   # Sub_KPI:Optional[KPI]
+    #Sub_KPI:Optional[Sub_KPI]
 
 
 class Network_KPI(KPI):
     KPI_Type: str
-    Sub_KPI:Optional[KPI]
-    Sub_KPIList:Optional[Sub_KPI]
+    #Sub_KPI:Optional[KPI]
+    Sub_KPI:Sub_KPI
+    
+
+KPIexample = Network_KPI(
+    id_short="finance",
+    id = "fin",
+    range = 200,
+    target = 250,
+    actualValue= 150,
+    KPI_Type="Monetary",
+    Sub_KPI=Sub_KPI(
+        id_short="f",
+        Sub_KPI = ["rer","gdf"],
+    )
+    #Sub_KPI.append
+    # Sub_KPI=Sub_KPI(
+    #     id_short="revenue",
+    #     KPI_Type="Monetary",
+    #     Sub_KPI=Sub_KPI(
+    #         id_short="Income",
+    #         KPI_Type="Monetary",
+    #     ),
+    # Sub_KPI=KPI(
+    #     id_short="Loans",
+    #     KPI_Type="Monetary",  
+    # )
+
+    # )
+)
+print(KPIexample)
 #------------------------------------------------------#
 
 class measurements_in_cm(SubmodelElementCollection):
