@@ -4,7 +4,6 @@ from aas2openapi.middleware import Middleware
 from aas2openapi import models
 from enum import Enum
 
-from models.Layer1 import Layer1, KPI,Product, BOM, Order, required_processes, Process, required_capabilities, Resource, Capability, parameters
 from models.Network import Network, Product_Network
 
 example_Layer_1 = Layer1(
